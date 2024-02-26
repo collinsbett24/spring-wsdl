@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+           xmlns:saf="http://www.example.com/soapexample/SAFAPP"
+           targetNamespace="http://www.example.com/soapexample/dtos"
+           elementFormDefault="qualified">
+    <xs:element name="Envelope" type="soapenv:EnvelopeType"/>
+
+    <xs:complexType name="WebRequestCommonType">
+        <xs:sequence>
+            <xs:element name="company" type="xs:string"/>
+            <xs:element name="password" type="xs:string"/>
+            <xs:element name="userName" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EnquiryInputCollectionType">
+        <xs:sequence>
+            <xs:element name="columnName" type="xs:string"/>
+            <xs:element name="criteriaValue" type="xs:string"/>
+            <xs:element name="operand" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ENOFCBASAFAPPENHANCEDETAILSType">
+        <xs:sequence>
+            <xs:element name="enquiryInputCollection" type="saf:EnquiryInputCollectionType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SAFAPPEhancementDetailsType">
+        <xs:sequence>
+            <xs:element name="WebRequestCommon" type="saf:WebRequestCommonType"/>
+            <xs:element name="ENOFCBASAFAPPENHANCEDETAILSType" type="saf:ENOFCBASAFAPPENHANCEDETAILSType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="SAFAPPEhancementDetails" type="saf:SAFAPPEhancementDetailsType"/>
+
+    <xs:complexType name="BodyType">
+        <xs:sequence>
+            <xs:element name="SAFAPPEhancementDetails" type="saf:SAFAPPEhancementDetailsType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EnvelopeType">
+        <xs:sequence>
+            <xs:element name="Header" type="xs:anyType" minOccurs="0"/>
+            <xs:element name="Body" type="saf:BodyType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
